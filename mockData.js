@@ -1,4 +1,4 @@
-{
+export const data = {
   "office_types": [
     {
       "id": 1,
@@ -30,8 +30,7 @@
       "district": "Pokhara",
       "municipality": "Metropolitan City",
       "latitude": 28.545308,
-      "longitude": 85.288856,
-      "geom": "POINT(85.288856 28.545308)"
+      "longitude": 85.288856
     },
     {
       "id": 2,
@@ -41,8 +40,7 @@
       "district": "Butwal",
       "municipality": "Metropolitan City",
       "latitude": 27.928671,
-      "longitude": 87.034631,
-      "geom": "POINT(87.034631 27.928671)"
+      "longitude": 87.034631
     },
     {
       "id": 3,
@@ -52,8 +50,7 @@
       "district": "Dharan",
       "municipality": "Rural Municipality",
       "latitude": 28.474273,
-      "longitude": 85.746211,
-      "geom": "POINT(85.746211 28.474273)"
+      "longitude": 85.746211
     },
     {
       "id": 4,
@@ -63,8 +60,7 @@
       "district": "Dharan",
       "municipality": "Sub-Metropolitan City",
       "latitude": 26.073179,
-      "longitude": 85.564559,
-      "geom": "POINT(85.564559 26.073179)"
+      "longitude": 85.564559
     },
     {
       "id": 5,
@@ -74,8 +70,7 @@
       "district": "Kathmandu",
       "municipality": "Sub-Metropolitan City",
       "latitude": 27.80192,
-      "longitude": 84.326145,
-      "geom": "POINT(84.326145 27.80192)"
+      "longitude": 84.326145
     },
     {
       "id": 6,
@@ -85,8 +80,7 @@
       "district": "Biratnagar",
       "municipality": "Sub-Metropolitan City",
       "latitude": 26.524848,
-      "longitude": 83.019393,
-      "geom": "POINT(83.019393 26.524848)"
+      "longitude": 83.019393
     },
     {
       "id": 7,
@@ -96,8 +90,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 26.679046,
-      "longitude": 83.648879,
-      "geom": "POINT(83.648879 26.679046)"
+      "longitude": 83.648879
     },
     {
       "id": 8,
@@ -107,8 +100,7 @@
       "district": "Biratnagar",
       "municipality": "Sub-Metropolitan City",
       "latitude": 26.946516,
-      "longitude": 85.510883,
-      "geom": "POINT(85.510883 26.946516)"
+      "longitude": 85.510883
     },
     {
       "id": 9,
@@ -118,8 +110,7 @@
       "district": "Butwal",
       "municipality": "Metropolitan City",
       "latitude": 28.726588,
-      "longitude": 87.353776,
-      "geom": "POINT(87.353776 28.726588)"
+      "longitude": 87.353776
     },
     {
       "id": 10,
@@ -129,8 +120,7 @@
       "district": "Kathmandu",
       "municipality": "Rural Municipality",
       "latitude": 28.396788,
-      "longitude": 86.328374,
-      "geom": "POINT(86.328374 28.396788)"
+      "longitude": 86.328374
     },
     {
       "id": 11,
@@ -140,8 +130,7 @@
       "district": "Bharatpur",
       "municipality": "Metropolitan City",
       "latitude": 27.573545,
-      "longitude": 81.044257,
-      "geom": "POINT(81.044257 27.573545)"
+      "longitude": 81.044257
     },
     {
       "id": 12,
@@ -151,8 +140,7 @@
       "district": "Bharatpur",
       "municipality": "Rural Municipality",
       "latitude": 26.552673,
-      "longitude": 86.000012,
-      "geom": "POINT(86.000012 26.552673)"
+      "longitude": 86.000012
     },
     {
       "id": 13,
@@ -162,8 +150,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 26.042456,
-      "longitude": 86.000015,
-      "geom": "POINT(86.000015 26.042456)"
+      "longitude": 86.000015
     },
     {
       "id": 14,
@@ -173,8 +160,7 @@
       "district": "Kathmandu",
       "municipality": "Sub-Metropolitan City",
       "latitude": 27.524287,
-      "longitude": 82.036563,
-      "geom": "POINT(82.036563 27.524287)"
+      "longitude": 82.036563
     },
     {
       "id": 15,
@@ -184,8 +170,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 26.339092,
-      "longitude": 86.507392,
-      "geom": "POINT(86.507392 26.339092)"
+      "longitude": 86.507392
     },
     {
       "id": 16,
@@ -195,8 +180,7 @@
       "district": "Butwal",
       "municipality": "Rural Municipality",
       "latitude": 26.237132,
-      "longitude": 87.860032,
-      "geom": "POINT(87.860032 26.237132)"
+      "longitude": 87.860032
     },
     {
       "id": 17,
@@ -206,8 +190,7 @@
       "district": "Biratnagar",
       "municipality": "Metropolitan City",
       "latitude": 26.973499,
-      "longitude": 82.319305,
-      "geom": "POINT(82.319305 26.973499)"
+      "longitude": 82.319305
     },
     {
       "id": 18,
@@ -217,8 +200,7 @@
       "district": "Bharatpur",
       "municipality": "Sub-Metropolitan City",
       "latitude": 28.59552,
-      "longitude": 81.986817,
-      "geom": "POINT(81.986817 28.59552)"
+      "longitude": 81.986817
     },
     {
       "id": 19,
@@ -228,8 +210,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 28.372967,
-      "longitude": 84.862002,
-      "geom": "POINT(84.862002 28.372967)"
+      "longitude": 84.862002
     },
     {
       "id": 20,
@@ -239,8 +220,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 28.129315,
-      "longitude": 80.509511,
-      "geom": "POINT(80.509511 28.129315)"
+      "longitude": 80.509511
     },
     {
       "id": 21,
@@ -250,8 +230,7 @@
       "district": "Butwal",
       "municipality": "Municipality",
       "latitude": 26.693836,
-      "longitude": 83.459196,
-      "geom": "POINT(83.459196 26.693836)"
+      "longitude": 83.459196
     },
     {
       "id": 22,
@@ -261,8 +240,7 @@
       "district": "Butwal",
       "municipality": "Municipality",
       "latitude": 28.432767,
-      "longitude": 82.555119,
-      "geom": "POINT(82.555119 28.432767)"
+      "longitude": 82.555119
     },
     {
       "id": 23,
@@ -272,8 +250,7 @@
       "district": "Dharan",
       "municipality": "Municipality",
       "latitude": 28.658965,
-      "longitude": 85.706562,
-      "geom": "POINT(85.706562 28.658965)"
+      "longitude": 85.706562
     },
     {
       "id": 24,
@@ -283,8 +260,7 @@
       "district": "Dharan",
       "municipality": "Sub-Metropolitan City",
       "latitude": 26.201295,
-      "longitude": 87.398446,
-      "geom": "POINT(87.398446 26.201295)"
+      "longitude": 87.398446
     },
     {
       "id": 25,
@@ -294,8 +270,7 @@
       "district": "Biratnagar",
       "municipality": "Municipality",
       "latitude": 27.77127,
-      "longitude": 84.968644,
-      "geom": "POINT(84.968644 27.77127)"
+      "longitude": 84.968644
     },
     {
       "id": 26,
@@ -305,8 +280,7 @@
       "district": "Dharan",
       "municipality": "Municipality",
       "latitude": 28.284661,
-      "longitude": 83.985335,
-      "geom": "POINT(83.985335 28.284661)"
+      "longitude": 83.985335
     },
     {
       "id": 27,
@@ -316,8 +290,7 @@
       "district": "Bharatpur",
       "municipality": "Municipality",
       "latitude": 28.153084,
-      "longitude": 82.572673,
-      "geom": "POINT(82.572673 28.153084)"
+      "longitude": 82.572673
     },
     {
       "id": 28,
@@ -327,8 +300,7 @@
       "district": "Kathmandu",
       "municipality": "Metropolitan City",
       "latitude": 28.176539,
-      "longitude": 82.578795,
-      "geom": "POINT(82.578795 28.176539)"
+      "longitude": 82.578795
     },
     {
       "id": 29,
@@ -338,8 +310,7 @@
       "district": "Butwal",
       "municipality": "Sub-Metropolitan City",
       "latitude": 27.911308,
-      "longitude": 85.791579,
-      "geom": "POINT(85.791579 27.911308)"
+      "longitude": 85.791579
     },
     {
       "id": 30,
@@ -349,8 +320,7 @@
       "district": "Butwal",
       "municipality": "Municipality",
       "latitude": 26.40836,
-      "longitude": 81.600201,
-      "geom": "POINT(81.600201 26.40836)"
+      "longitude": 81.600201
     },
     {
       "id": 31,
@@ -360,8 +330,7 @@
       "district": "Butwal",
       "municipality": "Sub-Metropolitan City",
       "latitude": 26.322412,
-      "longitude": 85.572523,
-      "geom": "POINT(85.572523 26.322412)"
+      "longitude": 85.572523
     },
     {
       "id": 32,
@@ -371,8 +340,7 @@
       "district": "Pokhara",
       "municipality": "Metropolitan City",
       "latitude": 26.078209,
-      "longitude": 85.20602,
-      "geom": "POINT(85.20602 26.078209)"
+      "longitude": 85.20602
     },
     {
       "id": 33,
@@ -382,8 +350,7 @@
       "district": "Biratnagar",
       "municipality": "Metropolitan City",
       "latitude": 27.970024,
-      "longitude": 84.094286,
-      "geom": "POINT(84.094286 27.970024)"
+      "longitude": 84.094286
     },
     {
       "id": 34,
@@ -393,8 +360,7 @@
       "district": "Biratnagar",
       "municipality": "Rural Municipality",
       "latitude": 28.406671,
-      "longitude": 83.342338,
-      "geom": "POINT(83.342338 28.406671)"
+      "longitude": 83.342338
     },
     {
       "id": 35,
@@ -404,8 +370,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 26.182687,
-      "longitude": 83.672955,
-      "geom": "POINT(83.672955 26.182687)"
+      "longitude": 83.672955
     },
     {
       "id": 36,
@@ -415,8 +380,7 @@
       "district": "Kathmandu",
       "municipality": "Rural Municipality",
       "latitude": 27.027594,
-      "longitude": 82.961262,
-      "geom": "POINT(82.961262 27.027594)"
+      "longitude": 82.961262
     },
     {
       "id": 37,
@@ -426,8 +390,7 @@
       "district": "Kathmandu",
       "municipality": "Metropolitan City",
       "latitude": 27.738615,
-      "longitude": 81.607418,
-      "geom": "POINT(81.607418 27.738615)"
+      "longitude": 81.607418
     },
     {
       "id": 38,
@@ -437,8 +400,7 @@
       "district": "Bharatpur",
       "municipality": "Rural Municipality",
       "latitude": 26.073127,
-      "longitude": 86.865941,
-      "geom": "POINT(86.865941 26.073127)"
+      "longitude": 86.865941
     },
     {
       "id": 39,
@@ -448,8 +410,7 @@
       "district": "Butwal",
       "municipality": "Rural Municipality",
       "latitude": 28.009716,
-      "longitude": 80.58416,
-      "geom": "POINT(80.58416 28.009716)"
+      "longitude": 80.58416
     },
     {
       "id": 40,
@@ -459,8 +420,7 @@
       "district": "Biratnagar",
       "municipality": "Rural Municipality",
       "latitude": 26.471423,
-      "longitude": 86.163464,
-      "geom": "POINT(86.163464 26.471423)"
+      "longitude": 86.163464
     },
     {
       "id": 41,
@@ -470,8 +430,7 @@
       "district": "Biratnagar",
       "municipality": "Sub-Metropolitan City",
       "latitude": 28.702791,
-      "longitude": 87.534287,
-      "geom": "POINT(87.534287 28.702791)"
+      "longitude": 87.534287
     },
     {
       "id": 42,
@@ -481,8 +440,7 @@
       "district": "Pokhara",
       "municipality": "Municipality",
       "latitude": 28.065967,
-      "longitude": 84.079965,
-      "geom": "POINT(84.079965 28.065967)"
+      "longitude": 84.079965
     },
     {
       "id": 43,
@@ -492,8 +450,7 @@
       "district": "Biratnagar",
       "municipality": "Metropolitan City",
       "latitude": 28.98973,
-      "longitude": 87.017578,
-      "geom": "POINT(87.017578 28.98973)"
+      "longitude": 87.017578
     },
     {
       "id": 44,
@@ -503,8 +460,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 27.987816,
-      "longitude": 86.829251,
-      "geom": "POINT(86.829251 27.987816)"
+      "longitude": 86.829251
     },
     {
       "id": 45,
@@ -514,8 +470,7 @@
       "district": "Pokhara",
       "municipality": "Municipality",
       "latitude": 28.588088,
-      "longitude": 87.838915,
-      "geom": "POINT(87.838915 28.588088)"
+      "longitude": 87.838915
     },
     {
       "id": 46,
@@ -525,8 +480,7 @@
       "district": "Dharan",
       "municipality": "Sub-Metropolitan City",
       "latitude": 27.887633,
-      "longitude": 81.082914,
-      "geom": "POINT(81.082914 27.887633)"
+      "longitude": 81.082914
     },
     {
       "id": 47,
@@ -536,8 +490,7 @@
       "district": "Bharatpur",
       "municipality": "Metropolitan City",
       "latitude": 28.066819,
-      "longitude": 81.343847,
-      "geom": "POINT(81.343847 28.066819)"
+      "longitude": 81.343847
     },
     {
       "id": 48,
@@ -547,8 +500,7 @@
       "district": "Dharan",
       "municipality": "Municipality",
       "latitude": 28.599356,
-      "longitude": 80.962309,
-      "geom": "POINT(80.962309 28.599356)"
+      "longitude": 80.962309
     },
     {
       "id": 49,
@@ -558,8 +510,7 @@
       "district": "Kathmandu",
       "municipality": "Municipality",
       "latitude": 26.369328,
-      "longitude": 86.983598,
-      "geom": "POINT(86.983598 26.369328)"
+      "longitude": 86.983598
     },
     {
       "id": 50,
@@ -569,8 +520,7 @@
       "district": "Butwal",
       "municipality": "Sub-Metropolitan City",
       "latitude": 27.14047,
-      "longitude": 80.946275,
-      "geom": "POINT(80.946275 27.14047)"
+      "longitude": 80.946275
     }
   ],
   "ip_hashes": [
@@ -980,7 +930,7 @@
       "id": "5b431442-15d4-4356-8226-142fa6b09f1a",
       "office_id": 1,
       "ip_hash_id": 11,
-      "bribe_amount": 4057.0,
+      "bribe_amount": 4057,
       "amount_range": "4000-4500",
       "report_week": "2025-07-16",
       "confidence_score": 0.71,
@@ -2303,7 +2253,7 @@
       "bribe_amount": 2018.11,
       "amount_range": "2000-2500",
       "report_week": "2025-07-25",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-08-09T22:12:44"
     },
     {
@@ -3740,7 +3690,7 @@
       "id": "0de1ec93-cebd-4a16-82db-d84f87d0ba2c",
       "office_id": 6,
       "ip_hash_id": 47,
-      "bribe_amount": 4711.0,
+      "bribe_amount": 4711,
       "amount_range": "4500-5000",
       "report_week": "2025-05-23",
       "confidence_score": 0.56,
@@ -3973,7 +3923,7 @@
       "bribe_amount": 3488.28,
       "amount_range": "3000-3500",
       "report_week": "2025-05-23",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-08-26T16:47:55"
     },
     {
@@ -4223,7 +4173,7 @@
       "bribe_amount": 4336.69,
       "amount_range": "4000-4500",
       "report_week": "2025-04-16",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-08-31T03:12:53"
     },
     {
@@ -4270,7 +4220,7 @@
       "id": "fc739c5e-4f88-435c-a09d-4ad99ec32fe6",
       "office_id": 7,
       "ip_hash_id": 44,
-      "bribe_amount": 4656.0,
+      "bribe_amount": 4656,
       "amount_range": "4500-5000",
       "report_week": "2025-12-09",
       "confidence_score": 0.7,
@@ -7500,7 +7450,7 @@
       "id": "05d2c676-9c5d-4a0d-9ba9-b056b3604a67",
       "office_id": 14,
       "ip_hash_id": 8,
-      "bribe_amount": 4773.0,
+      "bribe_amount": 4773,
       "amount_range": "4500-5000",
       "report_week": "2025-06-26",
       "confidence_score": 0.86,
@@ -7563,7 +7513,7 @@
       "bribe_amount": 3433.76,
       "amount_range": "3000-3500",
       "report_week": "2025-09-05",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-02-28T21:32:29"
     },
     {
@@ -7640,7 +7590,7 @@
       "id": "6e0602b2-07a3-42f8-ab30-5a3506d0d9dd",
       "office_id": 14,
       "ip_hash_id": 2,
-      "bribe_amount": 3084.0,
+      "bribe_amount": 3084,
       "amount_range": "3000-3500",
       "report_week": "2025-08-19",
       "confidence_score": 0.65,
@@ -8300,7 +8250,7 @@
       "id": "494a90a7-afbf-4791-9440-b0af6ea5ae09",
       "office_id": 15,
       "ip_hash_id": 49,
-      "bribe_amount": 3249.0,
+      "bribe_amount": 3249,
       "amount_range": "3000-3500",
       "report_week": "2025-03-05",
       "confidence_score": 0.67,
@@ -8440,7 +8390,7 @@
       "id": "c02b0f84-0339-4106-a296-9a3d5f4e37e7",
       "office_id": 16,
       "ip_hash_id": 30,
-      "bribe_amount": 1943.0,
+      "bribe_amount": 1943,
       "amount_range": "1500-2000",
       "report_week": "2025-07-03",
       "confidence_score": 0.89,
@@ -8570,7 +8520,7 @@
       "id": "887d113b-2568-4adf-b931-8b70b453dc69",
       "office_id": 16,
       "ip_hash_id": 47,
-      "bribe_amount": 969.0,
+      "bribe_amount": 969,
       "amount_range": "500-1000",
       "report_week": "2025-02-05",
       "confidence_score": 0.51,
@@ -10013,7 +9963,7 @@
       "bribe_amount": 3315.72,
       "amount_range": "3000-3500",
       "report_week": "2025-06-21",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-10-27T17:49:09"
     },
     {
@@ -10180,7 +10130,7 @@
       "id": "0bfee57e-d3bb-4888-9eb3-6bcf2a975275",
       "office_id": 19,
       "ip_hash_id": 35,
-      "bribe_amount": 1785.0,
+      "bribe_amount": 1785,
       "amount_range": "1500-2000",
       "report_week": "2025-04-09",
       "confidence_score": 0.83,
@@ -10720,7 +10670,7 @@
       "id": "1c0c474b-aef6-48ca-b338-fa1dfbca4836",
       "office_id": 20,
       "ip_hash_id": 45,
-      "bribe_amount": 4422.0,
+      "bribe_amount": 4422,
       "amount_range": "4000-4500",
       "report_week": "2025-12-22",
       "confidence_score": 0.97,
@@ -10780,7 +10730,7 @@
       "id": "1e3e1947-6f0f-42d5-90a4-d50e8c76487e",
       "office_id": 20,
       "ip_hash_id": 3,
-      "bribe_amount": 4668.0,
+      "bribe_amount": 4668,
       "amount_range": "4500-5000",
       "report_week": "2025-05-05",
       "confidence_score": 0.71,
@@ -10940,7 +10890,7 @@
       "id": "bec1fa10-bbf1-46ae-bfda-99bd72174d7a",
       "office_id": 21,
       "ip_hash_id": 42,
-      "bribe_amount": 469.0,
+      "bribe_amount": 469,
       "amount_range": "0-500",
       "report_week": "2025-07-15",
       "confidence_score": 0.83,
@@ -11253,7 +11203,7 @@
       "bribe_amount": 2352.97,
       "amount_range": "2000-2500",
       "report_week": "2025-03-17",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-08-29T17:37:54"
     },
     {
@@ -11603,7 +11553,7 @@
       "bribe_amount": 866.79,
       "amount_range": "500-1000",
       "report_week": "2025-04-18",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-07-21T15:57:25"
     },
     {
@@ -11813,7 +11763,7 @@
       "bribe_amount": 3336.74,
       "amount_range": "3000-3500",
       "report_week": "2025-05-21",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-06-29T20:01:12"
     },
     {
@@ -12063,7 +12013,7 @@
       "bribe_amount": 1521.41,
       "amount_range": "1500-2000",
       "report_week": "2025-05-11",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-03-24T01:27:36"
     },
     {
@@ -12273,7 +12223,7 @@
       "bribe_amount": 2077.87,
       "amount_range": "2000-2500",
       "report_week": "2025-06-03",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-08-15T00:43:36"
     },
     {
@@ -12313,7 +12263,7 @@
       "bribe_amount": 1085.76,
       "amount_range": "1000-1500",
       "report_week": "2025-11-10",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-09-18T21:31:45"
     },
     {
@@ -12423,7 +12373,7 @@
       "bribe_amount": 3560.13,
       "amount_range": "3500-4000",
       "report_week": "2025-04-27",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-01-21T09:41:44"
     },
     {
@@ -13650,7 +13600,7 @@
       "id": "52f0cc76-a2e7-43a2-a3f9-662a6936fcba",
       "office_id": 26,
       "ip_hash_id": 33,
-      "bribe_amount": 3594.0,
+      "bribe_amount": 3594,
       "amount_range": "3500-4000",
       "report_week": "2025-11-16",
       "confidence_score": 0.64,
@@ -14140,7 +14090,7 @@
       "id": "a0e77719-cbb4-4923-8f38-ab54c7ed27a6",
       "office_id": 27,
       "ip_hash_id": 42,
-      "bribe_amount": 1038.0,
+      "bribe_amount": 1038,
       "amount_range": "1000-1500",
       "report_week": "2025-06-10",
       "confidence_score": 0.93,
@@ -15260,7 +15210,7 @@
       "id": "61c75231-89ca-4df3-b58f-4bdab944030e",
       "office_id": 29,
       "ip_hash_id": 49,
-      "bribe_amount": 4666.0,
+      "bribe_amount": 4666,
       "amount_range": "4500-5000",
       "report_week": "2025-02-03",
       "confidence_score": 0.56,
@@ -16013,7 +15963,7 @@
       "bribe_amount": 2739.1,
       "amount_range": "2500-3000",
       "report_week": "2025-07-17",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-01-05T02:18:07"
     },
     {
@@ -16150,7 +16100,7 @@
       "id": "122edc10-cd50-40db-8401-15d2eda03db4",
       "office_id": 31,
       "ip_hash_id": 1,
-      "bribe_amount": 912.0,
+      "bribe_amount": 912,
       "amount_range": "500-1000",
       "report_week": "2025-04-01",
       "confidence_score": 0.65,
@@ -16293,7 +16243,7 @@
       "bribe_amount": 1280.1,
       "amount_range": "1000-1500",
       "report_week": "2025-01-16",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-11-02T18:31:33"
     },
     {
@@ -16370,7 +16320,7 @@
       "id": "31dc737f-9237-449b-80fe-1b41a669fa55",
       "office_id": 31,
       "ip_hash_id": 20,
-      "bribe_amount": 2269.0,
+      "bribe_amount": 2269,
       "amount_range": "2000-2500",
       "report_week": "2025-04-21",
       "confidence_score": 0.56,
@@ -16940,7 +16890,7 @@
       "id": "a5d75033-a6bb-4dc5-b639-6353e6769ae5",
       "office_id": 33,
       "ip_hash_id": 12,
-      "bribe_amount": 1681.0,
+      "bribe_amount": 1681,
       "amount_range": "1500-2000",
       "report_week": "2025-11-16",
       "confidence_score": 0.62,
@@ -17910,7 +17860,7 @@
       "id": "d3531fbb-7f22-4f91-9af5-445749f74b5a",
       "office_id": 35,
       "ip_hash_id": 17,
-      "bribe_amount": 3275.0,
+      "bribe_amount": 3275,
       "amount_range": "3000-3500",
       "report_week": "2025-09-13",
       "confidence_score": 0.87,
@@ -20020,7 +19970,7 @@
       "id": "ecfa46bf-e19e-499a-bc75-64d5839d00df",
       "office_id": 39,
       "ip_hash_id": 42,
-      "bribe_amount": 3575.0,
+      "bribe_amount": 3575,
       "amount_range": "3500-4000",
       "report_week": "2025-10-05",
       "confidence_score": 0.84,
@@ -20143,7 +20093,7 @@
       "bribe_amount": 3830.98,
       "amount_range": "3500-4000",
       "report_week": "2025-07-17",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-03-09T23:05:32"
     },
     {
@@ -20333,7 +20283,7 @@
       "bribe_amount": 609.46,
       "amount_range": "500-1000",
       "report_week": "2025-03-23",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-03-08T02:04:08"
     },
     {
@@ -21483,7 +21433,7 @@
       "bribe_amount": 2568.16,
       "amount_range": "2500-3000",
       "report_week": "2025-12-06",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-08-09T14:23:39"
     },
     {
@@ -21530,7 +21480,7 @@
       "id": "da4696de-8134-487d-b0df-18db3a6e9665",
       "office_id": 42,
       "ip_hash_id": 46,
-      "bribe_amount": 4701.0,
+      "bribe_amount": 4701,
       "amount_range": "4500-5000",
       "report_week": "2025-04-02",
       "confidence_score": 0.68,
@@ -24860,7 +24810,7 @@
       "id": "81d7b56a-8f61-4fb8-93f0-961e63479f6a",
       "office_id": 48,
       "ip_hash_id": 30,
-      "bribe_amount": 1047.0,
+      "bribe_amount": 1047,
       "amount_range": "1000-1500",
       "report_week": "2025-04-18",
       "confidence_score": 0.75,
@@ -25103,7 +25053,7 @@
       "bribe_amount": 2578.54,
       "amount_range": "2500-3000",
       "report_week": "2025-01-30",
-      "confidence_score": 1.0,
+      "confidence_score": 1,
       "created_at": "2025-05-11T12:25:29"
     },
     {
@@ -25740,7 +25690,7 @@
       "id": "57e35e07-4bc6-4e4e-bb57-6be79b658dbb",
       "office_id": 50,
       "ip_hash_id": 24,
-      "bribe_amount": 943.0,
+      "bribe_amount": 943,
       "amount_range": "500-1000",
       "report_week": "2025-08-04",
       "confidence_score": 0.54,
