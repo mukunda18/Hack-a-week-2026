@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
@@ -14,7 +14,7 @@ import OfficeConfirmation from '../components/report/OfficeConfirmation';
 import ReportForm from '../components/report/ReportForm';
 import SuccessMessage from '../components/report/SuccessMessage';
 
-export default function ReportPage() {
+function ReportContent() {
   const searchParams = useSearchParams();
   const [offices, setOffices] = useState([]);
   const [officeTypes, setOfficeTypes] = useState([]);
@@ -227,5 +227,13 @@ export default function ReportPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ReportPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ReportContent />
+    </Suspense>
   );
 }
