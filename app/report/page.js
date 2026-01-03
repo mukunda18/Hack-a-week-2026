@@ -14,6 +14,8 @@ export default function ReportPage() {
   const [loadingTypes, setLoadingTypes] = useState(true);
 
   const [bribeAmount, setBribeAmount] = useState('');
+  const [serviceDelay, setServiceDelay] = useState('');
+
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -61,6 +63,7 @@ export default function ReportPage() {
   };
 
   const handleBribeAmountChange = (e) => setBribeAmount(e.target.value);
+  const handleServiceDelayChange = (e) => setServiceDelay(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,10 +75,12 @@ export default function ReportPage() {
     try {
       await axios.post('/api/postReport', {
         officeId: selectedOffice,
-        bribeAmount: bribeAmount
+        bribeAmount: bribeAmount,
+        serviceDelay: serviceDelay
       });
       setSuccess(true);
       setBribeAmount('');
+      setServiceDelay('');
     } catch (err) {
       console.error('Error submitting report:', err);
       setErrorMsg('Failed to submit report. Please try again.');
@@ -159,7 +164,18 @@ export default function ReportPage() {
                         value={bribeAmount}
                         onChange={handleBribeAmountChange}
                         placeholder="e.g. 5000"
-                        required
+
+                      />
+                    </div>
+
+                    <div style={{ marginTop: '1rem' }}>
+                      <label>Service Delay (Days) - Optional</label>
+                      <input
+                        type="number"
+                        value={serviceDelay}
+                        onChange={handleServiceDelayChange}
+                        placeholder="e.g. 2"
+                        min="0"
                       />
                     </div>
 
