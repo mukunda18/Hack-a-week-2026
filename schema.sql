@@ -56,6 +56,12 @@ CREATE TABLE reports (
     delay INT
         CHECK (delay IS NULL OR delay >= 0),
 
+    service_type VARCHAR(100),
+    description TEXT,
+    visit_time TIME,
+    interaction_method VARCHAR(50),
+    outcome VARCHAR(50),          
+
     report_date DATE NOT NULL,
     confidence_score FLOAT DEFAULT 0.1 NOT NULL
         CHECK (confidence_score BETWEEN 0 AND 1),
@@ -66,6 +72,16 @@ CREATE TABLE reports (
     CONSTRAINT unique_daily_report_per_ip 
         UNIQUE (office_id, ip_hash_id, report_date)
 );
+
+
+CREATE INDEX idx_reports_service_type ON reports (service_type);
+CREATE INDEX idx_reports_interaction_method ON reports (interaction_method);
+CREATE INDEX idx_reports_outcome ON reports (outcome);
+
+CREATE INDEX idx_reports_office_recency 
+ON reports (office_id, created_at DESC);
+
+CREATE INDEX idx_reports_visit_time ON reports (visit_time);
 
 CREATE TABLE daily_limits (
     ip_hash_id INT NOT NULL

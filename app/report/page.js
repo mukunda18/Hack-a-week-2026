@@ -27,6 +27,11 @@ function ReportContent() {
 
   const [bribeAmount, setBribeAmount] = useState('');
   const [serviceDelay, setServiceDelay] = useState('');
+  const [serviceType, setServiceType] = useState('');
+  const [description, setDescription] = useState('');
+  const [visitTime, setVisitTime] = useState('');
+  const [interactionMethod, setInteractionMethod] = useState('');
+  const [outcome, setOutcome] = useState('');
 
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -112,6 +117,11 @@ function ReportContent() {
 
   const handleBribeAmountChange = (e) => setBribeAmount(e.target.value);
   const handleServiceDelayChange = (e) => setServiceDelay(e.target.value);
+  const handleServiceTypeChange = (e) => setServiceType(e.target.value);
+  const handleDescriptionChange = (e) => setDescription(e.target.value);
+  const handleVisitTimeChange = (e) => setVisitTime(e.target.value);
+  const handleInteractionMethodChange = (e) => setInteractionMethod(e.target.value);
+  const handleOutcomeChange = (e) => setOutcome(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,11 +137,21 @@ function ReportContent() {
       await axios.post('/api/postReport', {
         officeId: selectedOffice,
         bribeAmount: bribeAmount || null,
-        serviceDelay: serviceDelay || null
+        serviceDelay: serviceDelay || null,
+        serviceType: serviceType || null,
+        description: description || null,
+        visitTime: visitTime || null,
+        interactionMethod: interactionMethod || null,
+        outcome: outcome || null
       });
       setSuccess(true);
       setBribeAmount('');
       setServiceDelay('');
+      setServiceType('');
+      setDescription('');
+      setVisitTime('');
+      setInteractionMethod('');
+      setOutcome('');
     } catch (err) {
       console.error('Error submitting report:', err);
       const errorMessage = err.response?.data?.error || 'Failed to submit report. Please try again.';
@@ -145,6 +165,13 @@ function ReportContent() {
     setSuccess(false);
     setSelectedOffice('');
     setSelectedType('all');
+    setBribeAmount('');
+    setServiceDelay('');
+    setServiceType('');
+    setDescription('');
+    setVisitTime('');
+    setInteractionMethod('');
+    setOutcome('');
   };
 
   const handleClearFilters = () => {
@@ -205,6 +232,16 @@ function ReportContent() {
                     onBribeAmountChange={handleBribeAmountChange}
                     serviceDelay={serviceDelay}
                     onServiceDelayChange={handleServiceDelayChange}
+                    serviceType={serviceType}
+                    onServiceTypeChange={handleServiceTypeChange}
+                    description={description}
+                    onDescriptionChange={handleDescriptionChange}
+                    visitTime={visitTime}
+                    onVisitTimeChange={handleVisitTimeChange}
+                    interactionMethod={interactionMethod}
+                    onInteractionMethodChange={handleInteractionMethodChange}
+                    outcome={outcome}
+                    onOutcomeChange={handleOutcomeChange}
                     onSubmit={handleSubmit}
                     submitting={submitting}
                     errorMsg={errorMsg}

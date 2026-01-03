@@ -3,6 +3,16 @@ export default function ReportForm({
     onBribeAmountChange,
     serviceDelay,
     onServiceDelayChange,
+    serviceType,
+    onServiceTypeChange,
+    description,
+    onDescriptionChange,
+    visitTime,
+    onVisitTimeChange,
+    interactionMethod,
+    onInteractionMethodChange,
+    outcome,
+    onOutcomeChange,
     onSubmit,
     submitting,
     errorMsg
@@ -44,6 +54,83 @@ export default function ReportForm({
                     />
                     <p className="mt-1 text-xs text-gray-500">Excessive days waited beyond standard time.</p>
                 </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Service Type
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="e.g. Citizenship, Land Transfer"
+                        value={serviceType}
+                        onChange={onServiceTypeChange}
+                        className="block w-full rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 py-3 px-4"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Approximate Visit Time
+                    </label>
+                    <input
+                        type="time"
+                        value={visitTime}
+                        onChange={onVisitTimeChange}
+                        className="block w-full rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 py-3 px-4"
+                    />
+                </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Interaction Method
+                    </label>
+                    <select
+                        value={interactionMethod}
+                        onChange={onInteractionMethodChange}
+                        className="block w-full rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 py-3 px-4"
+                    >
+                        <option value="">Select Method</option>
+                        <option value="direct">Direct with Officer</option>
+                        <option value="agent">Through Agent (Dalal)</option>
+                        <option value="phone">Over Phone</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Final Outcome
+                    </label>
+                    <select
+                        value={outcome}
+                        onChange={onOutcomeChange}
+                        className="block w-full rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 py-3 px-4"
+                    >
+                        <option value="">Select Outcome</option>
+                        <option value="success">Service Received</option>
+                        <option value="failed">Service Refused</option>
+                        <option value="pending">Still Waiting</option>
+                        <option value="abandoned">I gave up</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Description of Interaction
+                </label>
+                <textarea
+                    rows="3"
+                    placeholder="Briefly describe what happened (anonymously)..."
+                    value={description}
+                    onChange={onDescriptionChange}
+                    className="block w-full rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 py-3 px-4"
+                ></textarea>
+                <p className="mt-1 text-xs text-gray-500">Do not include personal names or identifiable info.</p>
             </div>
 
             {errorMsg && (
