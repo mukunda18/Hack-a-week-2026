@@ -65,7 +65,7 @@ export default function ReportDetailPage() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="bg-white rounded-xl shadow-sm p-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-6">Report Details</h1>
-                    
+
                     <div className="space-y-6">
                         <div className="border-b border-gray-200 pb-4">
                             <h2 className="text-sm font-medium text-gray-500 mb-1">Report ID</h2>
@@ -93,7 +93,7 @@ export default function ReportDetailPage() {
                         )}
 
                         <div className="border-b border-gray-200 pb-4">
-                            <h2 className="text-sm font-medium text-gray-500 mb-1">Report Week</h2>
+                            <h2 className="text-sm font-medium text-gray-500 mb-1">Report Date</h2>
                             <p className="text-lg text-gray-900">{new Date(report.report_week).toLocaleDateString()}</p>
                         </div>
 

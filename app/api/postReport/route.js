@@ -37,7 +37,7 @@ export async function POST(request) {
         // Validate that at least one of bribeAmount or serviceDelay is provided
         const hasBribeAmount = data.bribeAmount !== undefined && data.bribeAmount !== null && data.bribeAmount !== '';
         const hasServiceDelay = data.serviceDelay !== undefined && data.serviceDelay !== null && data.serviceDelay !== '';
-        
+
         if (!hasBribeAmount && !hasServiceDelay) {
             return NextResponse.json(
                 { error: 'Please provide at least a bribe amount or service delay.' },
@@ -45,22 +45,17 @@ export async function POST(request) {
             );
         }
 
-        // Calculate report week (start of the week - Monday)
+        // Use complete date (today's date)
         const today = new Date();
-        const day = today.getDay(); // 0 is Sunday
-        const diff = today.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
-        const reportWeekDate = new Date(today);
-        reportWeekDate.setDate(diff);
-        reportWeekDate.setHours(0, 0, 0, 0);
-        const reportWeek = reportWeekDate.toISOString().split('T')[0];
+        const reportDate = today.toISOString().split('T')[0];
 
         const report = {
             office_id: officeId,
             bribe_amount: hasBribeAmount ? parseFloat(data.bribeAmount) : null,
             delay: hasServiceDelay ? parseInt(data.serviceDelay) : null,
-            report_date: reportWeek,
+            report_date: reportDate,
             ipHash: ipHash,
-            confidence_score: 0.8 
+            confidence_score: 0.8
         };
 
         const newReport = await createReport(report);
@@ -78,7 +73,7 @@ export async function POST(request) {
 
         if (error.message.includes('already exists')) {
             return NextResponse.json(
-                { error: 'You have already submitted a report for this office this week.' },
+                { error: 'You have already submitted a report for this office today.' },
                 { status: 409 }
             );
         }
