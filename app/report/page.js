@@ -1,298 +1,216 @@
 'use client';
 
-import { useState } from 'react';
-
-const districts = ['Kathmandu', 'Lalitpur', 'Bhaktapur'];
-const officesByDistrict = {
-  'Kathmandu': ['Ward Office', 'Land Revenue Office', 'Vehicle Registration'],
-  'Lalitpur': ['Municipality Office', 'Tax Office', 'Health Department'],
-  'Bhaktapur': ['District Office', 'Education Office', 'Planning Office']
-};
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: '40px auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif'
-  },
-  header: {
-    marginBottom: '30px'
-  },
-  title: {
-    fontSize: '24px',
-    marginBottom: '10px'
-  },
-  fieldset: {
-    border: '1px solid #ddd',
-    padding: '20px',
-    marginBottom: '20px',
-    borderRadius: '4px'
-  },
-  legend: {
-    fontSize: '16px',
-    fontWeight: 'bold',
-    padding: '0 10px'
-  },
-  input: {
-    width: '100%',
-    padding: '10px',
-    fontSize: '14px',
-    marginTop: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px'
-  },
-  buttonGroup: {
-    display: 'flex',
-    gap: '10px',
-    marginTop: '10px',
-    flexWrap: 'wrap'
-  },
-  typeButton: {
-    padding: '10px 20px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    backgroundColor: '#fff'
-  },
-  typeButtonActive: {
-    padding: '10px 20px',
-    border: '1px solid #000',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    backgroundColor: '#000',
-    color: '#fff'
-  },
-  textarea: {
-    width: '100%',
-    padding: '10px',
-    fontSize: '14px',
-    marginTop: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    fontFamily: 'Arial, sans-serif'
-  },
-  submitButton: {
-    width: '100%',
-    padding: '15px',
-    fontSize: '16px',
-    backgroundColor: '#000',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-  },
-  submitButtonDisabled: {
-    width: '100%',
-    padding: '15px',
-    fontSize: '16px',
-    backgroundColor: '#ccc',
-    color: '#666',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'not-allowed'
-  },
-  charCount: {
-    fontSize: '12px',
-    color: '#666',
-    marginTop: '5px'
-  },
-  progressBar: {
-    width: '100%',
-    height: '20px',
-    marginTop: '10px'
-  }
-};
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function ReportPage() {
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedOffice, setSelectedOffice] = useState('');
-  const [experienceType, setExperienceType] = useState('');
-  const [description, setDescription] = useState('');
-  const [file, setFile] = useState(null);
-  const [reportsToday, setReportsToday] = useState(0);
-  
-  const maxReportsPerDay = 2;
+  const [offices, setOffices] = useState([]);
+  const [officeTypes, setOfficeTypes] = useState([]);
 
-  const handleDistrictChange = (e) => {
-    setSelectedDistrict(e.target.value);
-    setSelectedOffice(''); 
-  };
+  const [selectedOffice, setSelectedOffice] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+
+  const [loadingOffices, setLoadingOffices] = useState(true);
+  const [loadingTypes, setLoadingTypes] = useState(true);
+
+  const [bribeAmount, setBribeAmount] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const typesRes = await axios.get('/api/getOfficeTypes');
+        setOfficeTypes(typesRes.data);
+      } catch (error) {
+        console.error('Error fetching initial data:', error);
+      } finally {
+        setLoadingTypes(false);
+      }
+    };
+    fetchInitialData();
+  }, []);
+
+  useEffect(() => {
+    const fetchOffices = async () => {
+      if (!selectedType) return;
+      setLoadingOffices(true);
+      try {
+        const response = await axios.get(`/api/getOffices/${selectedType}`);
+        setOffices(response.data);
+
+        if (selectedOffice && !response.data.find(o => o.id === parseInt(selectedOffice))) {
+          setSelectedOffice('');
+        }
+      } catch (error) {
+        console.error('Error fetching offices:', error);
+      } finally {
+        setLoadingOffices(false);
+      }
+    };
+    fetchOffices();
+  }, [selectedType]);
+
+  const handleTypeChange = (e) => setSelectedType(e.target.value);
 
   const handleOfficeChange = (e) => {
     setSelectedOffice(e.target.value);
+    setSuccess(false);
+    setErrorMsg('');
   };
 
-  const handleExperienceTypeClick = (type) => {
-    setExperienceType(type);
-  };
+  const handleBribeAmountChange = (e) => setBribeAmount(e.target.value);
 
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (reportsToday >= maxReportsPerDay) {
-      alert('Daily limit reached');
-      return;
+    if (!selectedOffice || !bribeAmount) return;
+
+    setSubmitting(true);
+    setErrorMsg('');
+
+    try {
+      await axios.post('/api/postReport', {
+        officeId: selectedOffice,
+        bribeAmount: bribeAmount
+      });
+      setSuccess(true);
+      setBribeAmount('');
+    } catch (err) {
+      console.error('Error submitting report:', err);
+      setErrorMsg('Failed to submit report. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
-
-    if (!selectedDistrict || !selectedOffice || !experienceType || description.length < 20) {
-      alert('Please complete all required fields');
-      return;
-    }
-
-    console.log({
-      district: selectedDistrict,
-      office: selectedOffice,
-      type: experienceType,
-      description: description,
-      file: file
-    });
-
-    setReportsToday(prev => prev + 1);
-
-    setSelectedDistrict('');
-    setSelectedOffice('');
-    setExperienceType('');
-    setDescription('');
-    setFile(null);
-
-    alert('Report submitted anonymously. Thank you!');
   };
-
-  const availableOffices = selectedDistrict ? officesByDistrict[selectedDistrict] || [] : [];
-
-  const canSubmit = selectedDistrict && selectedOffice && experienceType && description.length >= 20 && reportsToday < maxReportsPerDay;
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h1 style={styles.title}>Submit Anonymous Report</h1>
-        <p>Your identity is protected. Help identify systemic patterns.</p>
+    <div>
+      <div>
+        <div>
+          <div>
+            <h1>Report an Incident</h1>
+            <p>Select the government office where the incident occurred.</p>
+          </div>
+
+          <div>
+            {/* Filter Section */}
+            <div>
+
+              <div>
+                <label>
+                  Office Type
+                </label>
+                <select
+                  value={selectedType}
+                  onChange={handleTypeChange}
+                  disabled={loadingTypes}
+                >
+                  <option value="">All Office Types</option>
+                  {officeTypes.map(type => (
+                    <option key={type.id} value={type.id}>{type.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Main Office Selection */}
+            <div>
+              <label>
+                Specific Office
+              </label>
+              <div>
+                <select
+                  value={selectedOffice}
+                  onChange={handleOfficeChange}
+                  disabled={loadingOffices}
+                >
+                  <option value="">
+                    {loadingOffices ? 'Updating offices...' : 'Choose an office...'}
+                  </option>
+                  {offices.map(office => (
+                    <option key={office.id} value={office.id}>
+                      {office.name} {office.district ? `— ${office.district}` : ''}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {selectedOffice && (
+              <div>
+                <div>
+                  <div>
+                    <h3>Office Confirmed</h3>
+                    <p>
+                      You have selected <span>{offices.find(o => o.id === parseInt(selectedOffice))?.name}</span>.
+                    </p>
+                  </div>
+                </div>
+
+                {!success ? (
+                  <form onSubmit={handleSubmit}>
+                    <h4>Report Details</h4>
+
+                    <div>
+                      <label>Bribe Amount asked (NPR)</label>
+                      <input
+                        type="number"
+                        value={bribeAmount}
+                        onChange={handleBribeAmountChange}
+                        placeholder="e.g. 5000"
+                        required
+                      />
+                    </div>
+
+                    {errorMsg && (
+                      <div>
+                        {errorMsg}
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                    >
+                      {submitting ? 'Submitting Report...' : 'Submit Report'}
+                    </button>
+                  </form>
+                ) : (
+                  <div>
+                    <div>
+                      <p>Report submitted successfully! Thank you for your contribution.</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setSuccess(false);
+                        setSelectedOffice('');
+                        setSelectedType('');
+                      }}
+                    >
+                      Submit another report
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {!loadingOffices && offices.length === 0 && selectedType && (
+              <div>
+                <p>No offices found for these filters.</p>
+                <button
+                  onClick={() => {
+                    setSelectedType('');
+                    setSelectedOffice('');
+                  }}
+                >
+                  Clear all filters
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-
-      <form onSubmit={handleSubmit}>
-        
-        <fieldset style={styles.fieldset}>
-          <legend style={styles.legend}>Select District</legend>
-          <select 
-            value={selectedDistrict} 
-            onChange={handleDistrictChange}
-            style={styles.input}
-            required
-          >
-            <option value="">Choose a district...</option>
-            {districts.map(district => (
-              <option key={district} value={district}>
-                {district}
-              </option>
-            ))}
-          </select>
-        </fieldset>
-
-        <fieldset style={styles.fieldset} disabled={!selectedDistrict}>
-          <legend style={styles.legend}> Select Government Office</legend>
-          <select 
-            value={selectedOffice} 
-            onChange={handleOfficeChange}
-            disabled={!selectedDistrict}
-            style={styles.input}
-            required
-          >
-            <option value="">
-              {selectedDistrict ? 'Choose an office...' : 'Select a district first'}
-            </option>
-            {availableOffices.map(office => (
-              <option key={office} value={office}>
-                {office}
-              </option>
-            ))}
-          </select>
-        </fieldset>
-
-        <fieldset style={styles.fieldset} disabled={!selectedOffice}>
-          <legend style={styles.legend}> What did you experience?</legend>
-          <div style={styles.buttonGroup}>
-            {['Bribe Request', 'Work Delay'].map(type => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => handleExperienceTypeClick(type)}
-                disabled={!selectedOffice}
-                style={experienceType === type ? styles.typeButtonActive : styles.typeButton}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-
-        <fieldset style={styles.fieldset} disabled={!experienceType}>
-          <legend style={styles.legend}>Step 4: Describe What Happened</legend>
-          <textarea
-            value={description}
-            onChange={handleDescriptionChange}
-            disabled={!experienceType}
-            placeholder="Describe what happened. Avoid personal names."
-            rows={5}
-            maxLength={500}
-            style={styles.textarea}
-            required
-          />
-          <div style={styles.charCount}>
-            {description.length} / 500 characters (minimum 20 required)
-          </div>
-        </fieldset>
-
-        <fieldset style={styles.fieldset} disabled={!experienceType}>
-          <legend style={styles.legend}>Evidence Upload (Optional)</legend>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            disabled={!experienceType}
-            accept="image/*,.pdf"
-            style={styles.input}
-          />
-          <p style={styles.charCount}>Screenshots, photos of documents (personal info will be redacted)</p>
-        </fieldset>
-
-        <fieldset style={styles.fieldset}>
-          <legend style={styles.legend}>Daily Report Limit</legend>
-          <p>Reports submitted today: {reportsToday} / {maxReportsPerDay}</p>
-          <progress 
-            value={reportsToday} 
-            max={maxReportsPerDay}
-            style={styles.progressBar}
-          ></progress>
-        </fieldset>
-
-        <button 
-          type="submit" 
-          disabled={!canSubmit}
-          style={canSubmit ? styles.submitButton : styles.submitButtonDisabled}
-        >
-          {reportsToday >= maxReportsPerDay 
-            ? 'Daily Limit Reached' 
-            : 'Submit Anonymous Report'}
-        </button>
-
-        <fieldset style={styles.fieldset}>
-          <legend style={styles.legend}>Privacy Notice</legend>
-          <p style={{fontSize: '14px', lineHeight: '1.5'}}>
-            <strong>Your identity is never collected.</strong>
-            {' '}IP addresses are securely hashed for abuse prevention only. 
-            No MAC addresses, login credentials, or personal location data is stored.
-          </p>
-        </fieldset>
-
-      </form>
     </div>
   );
 }
