@@ -1,12 +1,12 @@
 'use client';
 
-import ContactHeader from '@/components/contact/ContactHeader';
-import ImportantNotice from '@/components/contact/ImportantNotice';
-import ContactCard from '@/components/contact/ContactCard';
-import ProjectInfo from '@/components/contact/ProjectInfo';
-import OfficialResources from '@/components/contact/OfficialResources';
-import FAQSection from '@/components/contact/FAQSection';
-import ProjectDisclaimer from '@/components/contact/ProjectDisclaimer';
+import ContactHeader from '@/app/components/contact/ContactHeader';
+import ImportantNotice from '@/app/components/contact/ImportantNotice';
+import ContactCard from '@/app/components/contact/ContactCard';
+import ProjectInfo from '@/app/components/contact/ProjectInfo';
+import OfficialResources from '@/app/components/contact/OfficialResources';
+import FAQSection from '@/app/components/contact/FAQSection';
+import ProjectDisclaimer from '@/app/components/contact/ProjectDisclaimer';
 
 export default function ContactPage() {
   const contactOptions = [
@@ -36,9 +36,9 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-sm p-8">
-          
+
           <ContactHeader />
-          
+
           <ImportantNotice />
 
           {/* Contact Options Grid */}
