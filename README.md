@@ -7,6 +7,10 @@
 The application is deployed and can be accessed at:
 
 👉 **[https://hack-a-week-2026.vercel.app/](https://hack-a-week-2026.vercel.app/)**
+---
+
+### ⚠️ Note on Data
+Please note that the current deployment at [hack-a-week-2026.vercel.app](https://hack-a-week-2026.vercel.app/) contains **mock data**. The reports, heat maps, and statistics shown are for demonstration purposes to illustrate how the system handles crowdsourced information.
 
 ---
 
