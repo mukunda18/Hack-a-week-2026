@@ -1,29 +1,33 @@
-export default function OfficeSelector({ 
-  selectedOffice, 
-  offices, 
-  loadingOffices, 
-  onOfficeChange 
-}) {
-  return (
-    <div className="mb-6">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Specific Office
-      </label>
-      <select
-        value={selectedOffice}
-        onChange={onOfficeChange}
-        disabled={loadingOffices}
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-      >
-        <option value="">
-          {loadingOffices ? 'Updating offices...' : 'Choose an office...'}
-        </option>
-        {offices.map(office => (
-          <option key={office.id} value={office.id}>
-            {office.name} {office.district ? `— ${office.district}` : ''}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
+export default function OfficeSelector({ selectedOffice, offices, loadingOffices, onOfficeChange }) {
+    if (offices.length === 0 && !loadingOffices) return null;
+
+    return (
+        <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+            <label className="block text-sm font-medium text-gray-700 mb-3 uppercase tracking-wide">
+                2. Select Specific Office
+            </label>
+
+            {loadingOffices ? (
+                <div className="h-12 bg-gray-100 rounded-xl animate-pulse"></div>
+            ) : (
+                <div className="relative">
+                    <select
+                        value={selectedOffice}
+                        onChange={onOfficeChange}
+                        className="block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 py-3 pl-4 pr-10 text-base"
+                    >
+                        <option value="">-- Choose an Office --</option>
+                        {offices.map((office) => (
+                            <option key={office.id} value={office.id}>
+                                {office.name} ({office.district}, {office.province})
+                            </option>
+                        ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        ▼
+                    </div>
+                </div>
+            )}
+        </div>
+    );
 }

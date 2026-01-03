@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getOfficesSeverityMap } from '@/lib/db';
 
+export const revalidate = 60;
+
 export async function GET() {
     try {
         const offices = await getOfficesSeverityMap();

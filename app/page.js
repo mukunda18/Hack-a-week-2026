@@ -1,7 +1,9 @@
 import { getGlobalStatsForToday } from '../lib/db';
 import Map from './components/map/Map';
+import StatsCard from './components/common/StatsCard';
+import FeatureCard from './components/common/FeatureCard';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function Home() {
   const stats = await getGlobalStatsForToday();
@@ -29,23 +31,25 @@ export default async function Home() {
           </p>
 
           <div className="grid grid-cols-3 gap-3 mt-4">
-            <div className="bg-red-50 p-2 rounded-lg border border-red-100 text-center">
-              <div className="text-[10px] text-red-600 uppercase font-semibold mb-1">Reports Today</div>
-              <div className="text-xl font-bold text-red-700">{stats.total_reports}</div>
-            </div>
-            <div className="bg-orange-50 p-2 rounded-lg border border-orange-100 text-center">
-              <div className="text-[10px] text-orange-600 uppercase font-semibold mb-1">Avg Bribe</div>
-              <div className="text-xl font-bold text-orange-700">{formatMoney(stats.avg_bribe)}</div>
-            </div>
-            <div className="bg-amber-50 p-2 rounded-lg border border-amber-100 text-center">
-              <div className="text-[10px] text-amber-600 uppercase font-semibold mb-1">Avg Delay</div>
-              <div className="text-xl font-bold text-amber-700">{Math.round(parseFloat(stats.avg_delay) || 0)} days</div>
-            </div>
+            <StatsCard
+              title="Reports Today"
+              value={stats.total_reports}
+              color="red"
+            />
+            <StatsCard
+              title="Avg Bribe"
+              value={formatMoney(stats.avg_bribe)}
+              color="orange"
+            />
+            <StatsCard
+              title="Avg Delay"
+              value={`${Math.round(parseFloat(stats.avg_delay) || 0)} days`}
+              color="amber"
+            />
           </div>
         </div>
       </div>
 
-      {/* Features / Info Section */}
       <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -56,35 +60,21 @@ export default async function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 text-2xl">
-                🛡️
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">100% Anonymous</h3>
-              <p className="text-gray-600 text-sm">
-                We use advanced hashing to protect your identity. No personal data is stored, ensuring your safety while you speak up.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4 text-2xl">
-                📍
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Location Mapping</h3>
-              <p className="text-gray-600 text-sm">
-                Visualizing corruption hotspots helps authorities and media identify which offices need immediate attention and reform.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 text-2xl">
-                ⚡
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Real Impact</h3>
-              <p className="text-gray-600 text-sm">
-                Aggregated data powers reports and dashboards that hold public servants accountable for delays and bribery.
-              </p>
-            </div>
+            <FeatureCard
+              icon="🛡️"
+              title="100% Anonymous"
+              description="We use advanced hashing to protect your identity. No personal data is stored, ensuring your safety while you speak up."
+            />
+            <FeatureCard
+              icon="📍"
+              title="Location Mapping"
+              description="Visualizing corruption hotspots helps authorities and media identify which offices need immediate attention and reform."
+            />
+            <FeatureCard
+              icon="⚡"
+              title="Real Impact"
+              description="Aggregated data powers reports and dashboards that hold public servants accountable for delays and bribery."
+            />
           </div>
         </div>
       </div>

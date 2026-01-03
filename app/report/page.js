@@ -2,17 +2,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import axios from 'axios';
 
-import ReportHeader from '../components/report/ReportHeader';
+import PageHeader from '../components/common/PageHeader';
+import EmptyState from '../components/common/EmptyState';
 import OfficeTypeFilter from '../components/report/OfficeTypeFilter';
 import OfficeSelector from '../components/report/OfficeSelector';
 import OfficeConfirmation from '../components/report/OfficeConfirmation';
 import ReportForm from '../components/report/ReportForm';
 import SuccessMessage from '../components/report/SuccessMessage';
-import EmptyState from '../components/report/EmptyState';
 
 export default function ReportPage() {
+  const searchParams = useSearchParams();
   const [offices, setOffices] = useState([]);
   const [officeTypes, setOfficeTypes] = useState([]);
 
@@ -48,6 +51,27 @@ export default function ReportPage() {
     };
     fetchInitialData();
   }, []);
+
+  useEffect(() => {
+    const prefillOffice = async () => {
+      const officeId = searchParams.get('officeId');
+      if (officeId) {
+        try {
+          // Fetch the office to get its type
+          const res = await axios.get(`/api/getOffice/${officeId}`);
+          const office = res.data;
+
+          if (office) {
+            setSelectedType(office.office_type_id);
+            setSelectedOffice(office.id);
+          }
+        } catch (error) {
+          console.error('Error pre-filling office:', error);
+        }
+      }
+    };
+    prefillOffice();
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchOffices = async () => {
@@ -135,7 +159,14 @@ export default function ReportPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-sm p-8">
 
-          <ReportHeader />
+          <PageHeader
+            title="Anonymous Corruption Reporting"
+          >
+            <p className="text-gray-600">
+              Submit a report about bribery or service delays in public offices.
+              Your submission is <strong>100% anonymous</strong> and helps visualize corruption across Nepal.
+            </p>
+          </PageHeader>
 
           <div className="space-y-6">
 
@@ -157,7 +188,16 @@ export default function ReportPage() {
 
             {selectedOffice && (
               <div className="space-y-6">
-                <OfficeConfirmation officeName={selectedOfficeName} />
+                <div className="flex items-center justify-between">
+                  <OfficeConfirmation officeName={selectedOfficeName} />
+                  <Link
+                    href={`/office/${selectedOffice}`}
+                    className="text-sm text-blue-600 hover:text-blue-800 hover:underline px-3"
+                    target="_blank"
+                  >
+                    View Office Stats ↗
+                  </Link>
+                </div>
 
                 {!success ? (
                   <ReportForm
@@ -176,7 +216,12 @@ export default function ReportPage() {
             )}
 
             {!loadingOffices && offices.length === 0 && selectedType && (
-              <EmptyState onClearFilters={handleClearFilters} />
+              <EmptyState
+                title="No offices found"
+                description="We couldn't find any offices matching this category. Please try selecting a different type."
+                actionLabel="Clear Filters"
+                onAction={handleClearFilters}
+              />
             )}
           </div>
         </div>

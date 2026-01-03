@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getFilteredOffices } from '@/lib/db';
 
+export const revalidate = 300;
+
 export async function GET(request, { params }) {
     try {
         const { typeId } = await params;

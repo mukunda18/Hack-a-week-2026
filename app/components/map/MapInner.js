@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Circle, Popup, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import Link from 'next/link';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -170,6 +171,24 @@ export default function MapInner() {
                       Last reported: {new Date(office.last_report_date).toLocaleDateString()}
                     </div>
                   )}
+
+                  <div style={{ marginTop: '12px', textAlign: 'right' }}>
+                    <Link
+                      href={`/office/${office.id}`}
+                      style={{
+                        display: 'inline-block',
+                        background: '#dc2626',
+                        color: 'white',
+                        padding: '6px 12px',
+                        borderRadius: '4px',
+                        fontSize: '12px',
+                        textDecoration: 'none',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      View Details →
+                    </Link>
+                  </div>
                 </div>
               </Popup>
             </Circle>

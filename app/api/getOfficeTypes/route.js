@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getOfficeTypes } from '@/lib/db';
 
+export const revalidate = 3600;
+
 export async function GET() {
     try {
         const types = await getOfficeTypes();
