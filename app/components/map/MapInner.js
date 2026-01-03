@@ -47,7 +47,7 @@ export default function MapInner() {
 
 
 
-  const isVisible = zoom >= 9;
+  const isVisible = zoom >= 7;
 
   return (
     <div style={{ position: 'relative' }}>
@@ -86,7 +86,7 @@ export default function MapInner() {
             <Circle
               key={office.id}
               center={[parseFloat(office.latitude), parseFloat(office.longitude)]}
-              radius={Math.sqrt(office.circle.radius) * 10}
+              radius={office.circle.radius * 3}
               pathOptions={{
                 fillColor: office.circle.color,
                 color: office.circle.borderColor,
@@ -156,7 +156,7 @@ export default function MapInner() {
                             office.normalized_score > 0.4 ? '#ea580c' : '#f59e0b',
                           fontWeight: 'bold'
                         }}>
-                          {office.severity_score.toFixed(1)}/100
+                          {office.severity_score.toFixed(1)}
                         </span>
                       </div>
                     </div>
