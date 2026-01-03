@@ -12,6 +12,7 @@ export default function ReportDetailPage() {
 
     useEffect(() => {
         const fetchReport = async () => {
+            if (!id) return;
             try {
                 const response = await axios.get(`/api/getReport/${id}`);
                 setReport(response.data);
