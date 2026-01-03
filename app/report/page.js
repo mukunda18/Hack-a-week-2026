@@ -17,7 +17,7 @@ export default function ReportPage() {
   const [officeTypes, setOfficeTypes] = useState([]);
 
   const [selectedOffice, setSelectedOffice] = useState('');
-  const [selectedType, setSelectedType] = useState('');
+  const [selectedType, setSelectedType] = useState('all');
 
   const [loadingOffices, setLoadingOffices] = useState(true);
   const [loadingTypes, setLoadingTypes] = useState(true);
@@ -51,7 +51,7 @@ export default function ReportPage() {
 
   useEffect(() => {
     const fetchOffices = async () => {
-      if (!selectedType) return;
+      if (selectedType === '') return;
       setLoadingOffices(true);
       try {
         const response = await axios.get(`/api/getOffices/${selectedType}`);
@@ -120,11 +120,11 @@ export default function ReportPage() {
   const handleReset = () => {
     setSuccess(false);
     setSelectedOffice('');
-    setSelectedType('');
+    setSelectedType('all');
   };
 
   const handleClearFilters = () => {
-    setSelectedType('');
+    setSelectedType('all');
     setSelectedOffice('');
   };
 

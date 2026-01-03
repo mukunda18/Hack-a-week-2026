@@ -1,8 +1,8 @@
-export default function OfficeTypeFilter({ 
-  selectedType, 
-  officeTypes, 
-  loadingTypes, 
-  onTypeChange 
+export default function OfficeTypeFilter({
+  selectedType,
+  officeTypes,
+  loadingTypes,
+  onTypeChange
 }) {
   return (
     <div className="mb-6">
@@ -15,7 +15,7 @@ export default function OfficeTypeFilter({
         disabled={loadingTypes}
         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
       >
-        <option value="">All Office Types</option>
+        <option value="all">All Office Types</option>
         {officeTypes.map(type => (
           <option key={type.id} value={type.id}>
             {type.name}
