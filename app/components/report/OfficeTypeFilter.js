@@ -1,3 +1,5 @@
+import Skeleton from '../common/Skeleton';
+
 export default function OfficeTypeFilter({ selectedType, officeTypes, loadingTypes, onTypeChange }) {
     return (
         <div>
@@ -7,7 +9,7 @@ export default function OfficeTypeFilter({ selectedType, officeTypes, loadingTyp
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                 {loadingTypes
                     ? Array(4).fill(0).map((_, i) => (
-                        <div key={i} className="h-10 bg-gray-100 rounded-lg animate-pulse"></div>
+                        <Skeleton key={i} className="h-10 rounded-lg" />
                     ))
                     : officeTypes.map((type) => (
                         <label

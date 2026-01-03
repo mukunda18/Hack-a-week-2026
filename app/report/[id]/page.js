@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from '@/lib/axios';
+import Skeleton from '@/app/components/common/Skeleton';
 
 export default function ReportDetailPage() {
     const { id } = useParams();
@@ -28,10 +29,19 @@ export default function ReportDetailPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading report...</p>
+            <div className="min-h-screen bg-gray-50 py-8">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="bg-white rounded-xl shadow-sm p-8">
+                        <Skeleton className="h-10 w-64 mb-6" />
+                        <div className="space-y-6">
+                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                <div key={i} className="border-b border-gray-200 pb-4">
+                                    <Skeleton className="h-4 w-24 mb-2" />
+                                    <Skeleton className="h-6 w-48" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

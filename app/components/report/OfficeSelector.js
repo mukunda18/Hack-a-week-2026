@@ -1,3 +1,5 @@
+import Skeleton from '../common/Skeleton';
+
 export default function OfficeSelector({ selectedOffice, offices, loadingOffices, onOfficeChange }) {
     if (offices.length === 0 && !loadingOffices) return null;
 
@@ -8,7 +10,7 @@ export default function OfficeSelector({ selectedOffice, offices, loadingOffices
             </label>
 
             {loadingOffices ? (
-                <div className="h-12 bg-gray-100 rounded-xl animate-pulse"></div>
+                <Skeleton className="h-12 rounded-xl" />
             ) : (
                 <div className="relative">
                     <select
