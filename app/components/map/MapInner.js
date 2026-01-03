@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Popup, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -44,12 +44,7 @@ export default function MapInner() {
     fetchMapData();
   }, []);
 
-  const getRadius = (baseRadius) => {
-    const referenceZoom = 15;
-    const scale = Math.pow(2, zoom - referenceZoom);
-    const minRadius = 2;
-    return Math.max(minRadius, baseRadius * scale);
-  };
+
 
   const isVisible = zoom >= 9;
 
@@ -86,17 +81,15 @@ export default function MapInner() {
         {offices.map((office) => {
           if (!office.circle.show || !isVisible) return null;
 
-          const currentRadius = getRadius(office.circle.radius);
-
           return (
-            <CircleMarker
+            <Circle
               key={office.id}
               center={[parseFloat(office.latitude), parseFloat(office.longitude)]}
-              radius={currentRadius}
+              radius={Math.sqrt(office.circle.radius) * 10}
               pathOptions={{
                 fillColor: office.circle.color,
                 color: office.circle.borderColor,
-                weight: currentRadius < 5 ? 1 : 2,
+                weight: 1,
                 opacity: 0.9,
                 fillOpacity: parseFloat(office.circle.color.match(/[\d.]+\)$/)?.[0].slice(0, -1) || 0.5)
               }}
@@ -179,7 +172,7 @@ export default function MapInner() {
                   )}
                 </div>
               </Popup>
-            </CircleMarker>
+            </Circle>
           );
         })}
       </MapContainer>
