@@ -1,67 +1,100 @@
-'use client';
+"use client";
 
-import ContactHeader from '@/app/components/contact/ContactHeader';
-import ImportantNotice from '@/app/components/contact/ImportantNotice';
-import ContactCard from '@/app/components/contact/ContactCard';
-import ProjectInfo from '@/app/components/contact/ProjectInfo';
-import OfficialResources from '@/app/components/contact/OfficialResources';
-import FAQSection from '@/app/components/contact/FAQSection';
-import ProjectDisclaimer from '@/app/components/contact/ProjectDisclaimer';
+import { useState } from "react";
 
-export default function ContactPage() {
-  const contactOptions = [
-    {
-      title: "Technical Support",
-      description: "Report bugs, technical issues, or get help using the platform",
-      email: "support.project@example.com"
-    },
-    {
-      title: "General Inquiries",
-      description: "Questions about the project or how it works",
-      email: "info.project@example.com"
-    },
-    {
-      title: "Feedback & Suggestions",
-      description: "Share your thoughts on improving the platform",
-      email: "feedback.project@example.com"
-    },
-    {
-      title: "Collaboration",
-      description: "Interested in contributing or collaborating",
-      email: "collaborate.project@example.com"
-    }
-  ];
+export default function Contact() {
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const email = "ghushmeter.admin@gmail.com"; // Admin email
+    const mailSubject = encodeURIComponent(subject);
+    const mailBody = encodeURIComponent(message);
+
+    // Open user's default email client with pre-filled email
+    window.location.href = `mailto:${email}?subject=${mailSubject}&body=${mailBody}`;
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow-sm p-8">
+    <div className="max-w-4xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
 
-          <ContactHeader />
+      <p className="text-gray-700 mb-5">
+        Ghush-Meter is committed to responsible data use, transparency,
+        and ethical reporting. If you notice incorrect information,
+        technical issues, or have concerns regarding the representation
+        of any organization or office on the heatmap, we encourage you
+        to contact the project administrators.
+      </p>
 
-          <ImportantNotice />
+      <h2 className="text-2xl font-semibold mt-6 mb-3">
+        When should you contact us?
+      </h2>
 
-          {/* Contact Options Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {contactOptions.map((option, index) => (
-              <ContactCard
-                key={index}
-                title={option.title}
-                description={option.description}
-                email={option.email}
-              />
-            ))}
-          </div>
+      <ul className="list-disc list-inside text-gray-700 mb-5 space-y-2">
+        <li>Incorrect office location or classification</li>
+        <li>Technical errors or broken features on the platform</li>
+        <li>Duplicate or misleading data visualization</li>
+        <li>Concerns about reputational impact on an organization</li>
+        <li>Requests for data review or clarification</li>
+      </ul>
 
-          <ProjectInfo />
+      <p className="text-gray-700 mb-5">
+        All reports are reviewed carefully. Ghush-Meter does not intend
+        to accuse individuals or institutions, and displayed data
+        reflects aggregated public submissions rather than verified
+        legal findings.
+      </p>
 
-          <OfficialResources />
+      <h2 className="text-2xl font-semibold mt-6 mb-3">
+        How to reach the admin
+      </h2>
 
-          <FAQSection />
+      <p className="text-gray-700 mb-6">
+        Please contact the Ghush-Meter admin team via email with clear
+        details of the issue, including screenshots or references where
+        applicable. This helps us investigate and take appropriate
+        corrective action.
+      </p>
 
-          <ProjectDisclaimer />
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Subject</label>
+          <input
+            type="text"
+            required
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="e.g. Incorrect heatmap data for an office"
+            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          />
         </div>
-      </div>
+
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Message</label>
+          <textarea
+            required
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows="6"
+            placeholder="Please describe the issue clearly, including office name and location."
+            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200"
+        >
+          Send Email
+        </button>
+      </form>
+
+      <p className="text-gray-700 mt-6">
+        📧 Admin Email: <span className="underline">ghushmeter.admin@gmail.com</span>
+      </p>
     </div>
   );
 }
