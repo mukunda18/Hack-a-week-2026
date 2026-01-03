@@ -95,7 +95,7 @@ export default function ReportDetailPage() {
 
                         <div className="border-b border-gray-200 pb-4">
                             <h2 className="text-sm font-medium text-gray-500 mb-1">Report Date</h2>
-                            <p className="text-lg text-gray-900">{new Date(report.report_week).toLocaleDateString()}</p>
+                            <p className="text-lg text-gray-900">{new Date(report.report_date).toLocaleDateString()}</p>
                         </div>
 
                         <div className="border-b border-gray-200 pb-4">

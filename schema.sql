@@ -61,7 +61,7 @@ CREATE TABLE reports (
     delay INT
         CHECK (delay IS NULL OR delay >= 0),
 
-    report_week DATE NOT NULL,
+    report_date DATE NOT NULL,
     confidence_score FLOAT DEFAULT 0.1 NOT NULL
         CHECK (confidence_score BETWEEN 0 AND 1),
 
@@ -69,7 +69,7 @@ CREATE TABLE reports (
     updated_at TIMESTAMP DEFAULT now() NOT NULL,
 
     CONSTRAINT unique_weekly_report_per_ip 
-        UNIQUE (office_id, ip_hash_id, report_week)
+        UNIQUE (office_id, ip_hash_id, report_date)
 );
 
 CREATE TABLE daily_limits (
@@ -117,7 +117,7 @@ CREATE INDEX idx_offices_name
 ON offices (name);
 
 CREATE INDEX idx_reports_office_week
-ON reports (office_id, report_week DESC);
+ON reports (office_id, report_date DESC);
 
 CREATE INDEX idx_reports_created_at
 ON reports (created_at DESC);
