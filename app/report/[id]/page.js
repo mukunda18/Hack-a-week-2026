@@ -13,11 +13,11 @@ export default function ReportDetailPage() {
     useEffect(() => {
         const fetchReport = async () => {
             try {
-                const response = await axios.get(`/api/reports/${id}`);
+                const response = await axios.get(`/api/getReport/${id}`);
                 setReport(response.data);
             } catch (error) {
                 console.error('Error fetching report:', error);
-                setError(error.message);
+                setError(error.response?.data?.error || error.message);
             } finally {
                 setLoading(false);
             }
@@ -25,15 +25,90 @@ export default function ReportDetailPage() {
         fetchReport();
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!report) return <div>Report not found</div>;
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p className="text-gray-600">Loading report...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+                    <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+                        <h2 className="font-semibold mb-2">Error</h2>
+                        <p>{error}</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (!report) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full text-center">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Report Not Found</h2>
+                    <p className="text-gray-600">The report you're looking for doesn't exist.</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <h1>Report Details</h1>
-            <p>Report ID: {id}</p>
-            <p>Report Data: {JSON.stringify(report)}</p>
+        <div className="min-h-screen bg-gray-50 py-8">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="bg-white rounded-xl shadow-sm p-8">
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">Report Details</h1>
+                    
+                    <div className="space-y-6">
+                        <div className="border-b border-gray-200 pb-4">
+                            <h2 className="text-sm font-medium text-gray-500 mb-1">Report ID</h2>
+                            <p className="text-lg text-gray-900 font-mono">{report.id}</p>
+                        </div>
+
+                        <div className="border-b border-gray-200 pb-4">
+                            <h2 className="text-sm font-medium text-gray-500 mb-1">Office</h2>
+                            <p className="text-lg text-gray-900">{report.office_name}</p>
+                            <p className="text-sm text-gray-600">{report.office_type_name}</p>
+                        </div>
+
+                        {report.bribe_amount !== null && (
+                            <div className="border-b border-gray-200 pb-4">
+                                <h2 className="text-sm font-medium text-gray-500 mb-1">Bribe Amount</h2>
+                                <p className="text-lg text-gray-900">NPR {parseFloat(report.bribe_amount).toLocaleString()}</p>
+                            </div>
+                        )}
+
+                        {report.delay !== null && (
+                            <div className="border-b border-gray-200 pb-4">
+                                <h2 className="text-sm font-medium text-gray-500 mb-1">Service Delay</h2>
+                                <p className="text-lg text-gray-900">{report.delay} day{report.delay !== 1 ? 's' : ''}</p>
+                            </div>
+                        )}
+
+                        <div className="border-b border-gray-200 pb-4">
+                            <h2 className="text-sm font-medium text-gray-500 mb-1">Report Week</h2>
+                            <p className="text-lg text-gray-900">{new Date(report.report_week).toLocaleDateString()}</p>
+                        </div>
+
+                        <div className="border-b border-gray-200 pb-4">
+                            <h2 className="text-sm font-medium text-gray-500 mb-1">Confidence Score</h2>
+                            <p className="text-lg text-gray-900">{(report.confidence_score * 100).toFixed(1)}%</p>
+                        </div>
+
+                        <div>
+                            <h2 className="text-sm font-medium text-gray-500 mb-1">Created At</h2>
+                            <p className="text-lg text-gray-900">{new Date(report.created_at).toLocaleString()}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

@@ -26,19 +26,41 @@ export async function POST(request) {
             );
         }
 
-        // Calculate report week (start of the week)
+        const officeId = parseInt(data.officeId);
+        if (isNaN(officeId) || officeId <= 0) {
+            return NextResponse.json(
+                { error: 'Invalid office ID' },
+                { status: 400 }
+            );
+        }
+
+        // Validate that at least one of bribeAmount or serviceDelay is provided
+        const hasBribeAmount = data.bribeAmount !== undefined && data.bribeAmount !== null && data.bribeAmount !== '';
+        const hasServiceDelay = data.serviceDelay !== undefined && data.serviceDelay !== null && data.serviceDelay !== '';
+        
+        if (!hasBribeAmount && !hasServiceDelay) {
+            return NextResponse.json(
+                { error: 'Please provide at least a bribe amount or service delay.' },
+                { status: 400 }
+            );
+        }
+
+        // Calculate report week (start of the week - Monday)
         const today = new Date();
         const day = today.getDay(); // 0 is Sunday
         const diff = today.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
-        const reportWeek = new Date(today.setDate(diff)).toISOString().split('T')[0];
+        const reportWeekDate = new Date(today);
+        reportWeekDate.setDate(diff);
+        reportWeekDate.setHours(0, 0, 0, 0);
+        const reportWeek = reportWeekDate.toISOString().split('T')[0];
 
         const report = {
-            office_id: parseInt(data.officeId),
-            bribe_amount: data.bribeAmount ? parseFloat(data.bribeAmount) : null,
-            delay: data.serviceDelay ? parseInt(data.serviceDelay) : null,
+            office_id: officeId,
+            bribe_amount: hasBribeAmount ? parseFloat(data.bribeAmount) : null,
+            delay: hasServiceDelay ? parseInt(data.serviceDelay) : null,
             report_date: reportWeek,
             ipHash: ipHash,
-            confidence_score: 0.8 // Initial confidence score
+            confidence_score: 0.8 
         };
 
         const newReport = await createReport(report);

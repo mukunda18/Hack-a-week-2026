@@ -91,7 +91,10 @@ export default function ReportPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedOffice || !bribeAmount) return;
+    if (!selectedOffice || (!bribeAmount && !serviceDelay)) {
+      setErrorMsg('Please provide at least a bribe amount or service delay.');
+      return;
+    }
 
     setSubmitting(true);
     setErrorMsg('');
@@ -99,15 +102,16 @@ export default function ReportPage() {
     try {
       await axios.post('/api/postReport', {
         officeId: selectedOffice,
-        bribeAmount: bribeAmount,
-        serviceDelay: serviceDelay
+        bribeAmount: bribeAmount || null,
+        serviceDelay: serviceDelay || null
       });
       setSuccess(true);
       setBribeAmount('');
       setServiceDelay('');
     } catch (err) {
       console.error('Error submitting report:', err);
-      setErrorMsg('Failed to submit report. Please try again.');
+      const errorMessage = err.response?.data?.error || 'Failed to submit report. Please try again.';
+      setErrorMsg(errorMessage);
     } finally {
       setSubmitting(false);
     }
@@ -156,48 +160,17 @@ export default function ReportPage() {
                 <OfficeConfirmation officeName={selectedOfficeName} />
 
                 {!success ? (
-                  <form onSubmit={handleSubmit}>
-                    <h4>Report Details</h4>
-
-                    <div>
-                      <label>Bribe Amount asked (NPR)</label>
-                      <input
-                        type="number"
-                        value={bribeAmount}
-                        onChange={handleBribeAmountChange}
-                        placeholder="e.g. 5000"
-                        required
-                      />
-                    </div>
-
-                    {errorMsg && (
-                      <div>
-                        {errorMsg}
-                      </div>
-                    )}
-
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                    >
-                      {submitting ? 'Submitting Report...' : 'Submit Report'}
-                    </button>
-                  </form>
+                  <ReportForm
+                    bribeAmount={bribeAmount}
+                    onBribeAmountChange={handleBribeAmountChange}
+                    serviceDelay={serviceDelay}
+                    onServiceDelayChange={handleServiceDelayChange}
+                    onSubmit={handleSubmit}
+                    submitting={submitting}
+                    errorMsg={errorMsg}
+                  />
                 ) : (
-                  <div>
-                    <div>
-                      <p>Report submitted successfully! Thank you for your contribution.</p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setSuccess(false);
-                        setSelectedOffice('');
-                        setSelectedType('');
-                      }}
-                    >
-                      Submit another report
-                    </button>
-                  </div>
+                  <SuccessMessage onReset={handleReset} />
                 )}
               </div>
             )}
