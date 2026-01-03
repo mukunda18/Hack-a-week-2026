@@ -105,7 +105,7 @@ function ReportContent() {
       }
     };
     fetchOffices();
-  }, [selectedType]);
+  }, [selectedType, selectedOffice]); // Added selectedOffice to satisfy lint, logic handles it correctly
 
   const handleTypeChange = (e) => setSelectedType(e.target.value);
 
@@ -255,7 +255,7 @@ function ReportContent() {
             {!loadingOffices && offices.length === 0 && selectedType && (
               <EmptyState
                 title="No offices found"
-                description="We couldn't find any offices matching this category. Please try selecting a different type."
+                description="We couldn&apos;t find any offices matching this category. Please try selecting a different type."
                 actionLabel="Clear Filters"
                 onAction={handleClearFilters}
               />

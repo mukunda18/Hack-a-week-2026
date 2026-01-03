@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
     return (
         <footer className="bg-gray-900 border-t border-gray-800">
@@ -22,10 +24,10 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">Platform</h3>
                         <ul className="space-y-3">
-                            <li><a href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Home</a></li>
-                            <li><a href="/report" className="text-gray-400 hover:text-white transition-colors text-sm">Report Incident</a></li>
-                            <li><a href="/map" className="text-gray-400 hover:text-white transition-colors text-sm">Live Map</a></li>
-                            <li><a href="/statistics" className="text-gray-400 hover:text-white transition-colors text-sm">Statistics</a></li>
+                            <li><Link href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Home</Link></li>
+                            <li><Link href="/report" className="text-gray-400 hover:text-white transition-colors text-sm">Report Incident</Link></li>
+                            <li><Link href="/map" className="text-gray-400 hover:text-white transition-colors text-sm">Live Map</Link></li>
+                            <li><Link href="/statistics" className="text-gray-400 hover:text-white transition-colors text-sm">Statistics</Link></li>
                         </ul>
                     </div>
 
@@ -33,10 +35,10 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">Resources</h3>
                         <ul className="space-y-3">
-                            <li><a href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li>
-                            <li><a href="/faq" className="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
-                            <li><a href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
-                            <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                            <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</Link></li>
+                            <li><Link href="/faq" className="text-gray-400 hover:text-white transition-colors text-sm">FAQ</Link></li>
+                            <li><Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</Link></li>
+                            <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">Contact</Link></li>
                         </ul>
                     </div>
 

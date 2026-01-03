@@ -65,7 +65,7 @@ export default function ReportDetailPage() {
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
                 <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full text-center">
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Report Not Found</h2>
-                    <p className="text-gray-600">The report you're looking for doesn't exist.</p>
+                    <p className="text-gray-600">The report you&apos;re looking for doesn&apos;t exist.</p>
                 </div>
             </div>
         );
