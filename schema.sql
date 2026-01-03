@@ -22,11 +22,6 @@ CREATE TABLE offices (
     district VARCHAR(50),
     municipality VARCHAR(50),
 
-    latitude DOUBLE PRECISION NOT NULL
-        CHECK (latitude BETWEEN -90 AND 90),
-    longitude DOUBLE PRECISION NOT NULL
-        CHECK (longitude BETWEEN -180 AND 180),
-
     geom GEOGRAPHY(Point, 4326) NOT NULL,
 
     created_at TIMESTAMP DEFAULT now() NOT NULL,
@@ -68,7 +63,7 @@ CREATE TABLE reports (
     created_at TIMESTAMP DEFAULT now() NOT NULL,
     updated_at TIMESTAMP DEFAULT now() NOT NULL,
 
-    CONSTRAINT unique_weekly_report_per_ip 
+    CONSTRAINT unique_daily_report_per_ip 
         UNIQUE (office_id, ip_hash_id, report_date)
 );
 
@@ -128,16 +123,6 @@ ON daily_limits (report_date DESC);
 CREATE INDEX idx_ip_hashes_hash
 ON ip_hashes (ip_hash);
 
-CREATE OR REPLACE FUNCTION set_office_geom()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.geom := ST_SetSRID(
-        ST_MakePoint(NEW.longitude, NEW.latitude),
-        4326
-    );
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION update_ip_last_seen()
 RETURNS TRIGGER AS $$
@@ -157,10 +142,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_set_office_geom
-BEFORE INSERT OR UPDATE OF latitude, longitude ON offices
-FOR EACH ROW
-EXECUTE FUNCTION set_office_geom();
 
 CREATE TRIGGER trg_update_ip_last_seen
 AFTER INSERT ON reports
