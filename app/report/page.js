@@ -23,6 +23,8 @@ export default function ReportPage() {
   const [loadingTypes, setLoadingTypes] = useState(true);
 
   const [bribeAmount, setBribeAmount] = useState('');
+  const [serviceDelay, setServiceDelay] = useState('');
+
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -85,10 +87,14 @@ export default function ReportPage() {
   };
 
   const handleBribeAmountChange = (e) => setBribeAmount(e.target.value);
+  const handleServiceDelayChange = (e) => setServiceDelay(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedOffice || !bribeAmount) return;
+    if (!selectedOffice || (!bribeAmount && !serviceDelay)) {
+      setErrorMsg('Please provide at least a bribe amount or service delay.');
+      return;
+    }
 
     setSubmitting(true);
     setErrorMsg('');
@@ -96,13 +102,16 @@ export default function ReportPage() {
     try {
       await axios.post('/api/postReport', {
         officeId: selectedOffice,
-        bribeAmount: bribeAmount
+        bribeAmount: bribeAmount || null,
+        serviceDelay: serviceDelay || null
       });
       setSuccess(true);
       setBribeAmount('');
+      setServiceDelay('');
     } catch (err) {
       console.error('Error submitting report:', err);
-      setErrorMsg('Failed to submit report. Please try again.');
+      const errorMessage = err.response?.data?.error || 'Failed to submit report. Please try again.';
+      setErrorMsg(errorMessage);
     } finally {
       setSubmitting(false);
     }
@@ -154,6 +163,8 @@ export default function ReportPage() {
                   <ReportForm
                     bribeAmount={bribeAmount}
                     onBribeAmountChange={handleBribeAmountChange}
+                    serviceDelay={serviceDelay}
+                    onServiceDelayChange={handleServiceDelayChange}
                     onSubmit={handleSubmit}
                     submitting={submitting}
                     errorMsg={errorMsg}
