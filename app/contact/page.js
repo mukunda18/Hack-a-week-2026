@@ -5,16 +5,31 @@ import { useState } from "react";
 export default function Contact() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("Sending...");
 
-    const email = "ghushmeter.admin@gmail.com"; // Admin email
-    const mailSubject = encodeURIComponent(subject);
-    const mailBody = encodeURIComponent(message);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subject, message }),
+      });
 
-    // Open user's default email client with pre-filled email
-    window.location.href = `mailto:${email}?subject=${mailSubject}&body=${mailBody}`;
+      const data = await res.json();
+      if (res.ok) {
+        setStatus("Email sent successfully!");
+        setSubject("");
+        setMessage("");
+      } else {
+        setStatus("Failed to send email. Try again later.");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("Failed to send email. Try again later.");
+    }
   };
 
   return (
@@ -59,6 +74,7 @@ export default function Contact() {
         corrective action.
       </p>
 
+      {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <label className="block text-gray-700 font-medium mb-1">Subject</label>
@@ -91,6 +107,8 @@ export default function Contact() {
           Send Email
         </button>
       </form>
+
+      {status && <p className="mt-4 text-gray-700">{status}</p>}
 
       <p className="text-gray-700 mt-6">
         📧 Admin Email: <span className="underline">ghushmeter.admin@gmail.com</span>
