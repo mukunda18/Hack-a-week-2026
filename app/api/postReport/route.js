@@ -12,26 +12,19 @@ export async function POST(request) {
         const data = await request.json();
         const headersList = await headers();
 
-        // Get IP address
+        // Get IP address for hashing
         const forwardedFor = headersList.get('x-forwarded-for');
         const ip = forwardedFor ? forwardedFor.split(',')[0] : '127.0.0.1';
-
         const ipHash = getIpHash(ip);
 
-        // Validate required fields
+        // Required field: officeId
         if (!data.officeId) {
-            return NextResponse.json(
-                { error: 'Office ID is required' },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: 'Office ID is required' }, { status: 400 });
         }
 
         const officeId = parseInt(data.officeId);
         if (isNaN(officeId) || officeId <= 0) {
-            return NextResponse.json(
-                { error: 'Invalid office ID' },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: 'Invalid office ID' }, { status: 400 });
         }
 
         // Validate that at least one of bribeAmount or serviceDelay is provided
@@ -45,20 +38,24 @@ export async function POST(request) {
             );
         }
 
-        // Use complete date (today's date)
-        const today = new Date();
-        const reportDate = today.toISOString().split('T')[0];
-
-        const report = {
+        // Prepare report data mapping from camelCase (JS) to snake_case (DB expectations in createReport)
+        const reportData = {
             office_id: officeId,
+            ipHash: ipHash, // Used internally by createReport
             bribe_amount: hasBribeAmount ? parseFloat(data.bribeAmount) : null,
             delay: hasServiceDelay ? parseInt(data.serviceDelay) : null,
-            report_date: reportDate,
-            ipHash: ipHash,
-            confidence_score: 0.8
+            report_date: data.reportDate || new Date().toISOString().split('T')[0],
+            confidence_score: data.confidenceScore !== undefined ? parseFloat(data.confidenceScore) : 0.8,
+            service_type: data.serviceType || null,
+            description: data.description || null,
+            visit_time: data.visitTime || null,
+            interaction_method: data.interactionMethod || null,
+            outcome: data.outcome || null
         };
 
-        const newReport = await createReport(report);
+        const select = data.select || {};
+
+        const newReport = await createReport(reportData, select);
 
         return NextResponse.json(newReport, { status: 201 });
     } catch (error) {
@@ -79,7 +76,7 @@ export async function POST(request) {
         }
 
         return NextResponse.json(
-            { error: 'Failed to create report' },
+            { error: error.message || 'Failed to create report' },
             { status: 500 }
         );
     }

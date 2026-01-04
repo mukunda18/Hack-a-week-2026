@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getOfficeById } from '@/lib/db';
+import { getOffice } from '@/lib/db';
 
 export const revalidate = 60;
 
@@ -9,7 +9,14 @@ export async function GET(request, { params }) {
         if (!id) {
             return NextResponse.json({ error: 'ID is required' }, { status: 400 });
         }
-        const office = await getOfficeById(id);
+
+        const { searchParams } = new URL(request.url);
+        const select = {
+            fields: searchParams.get('fields')
+        };
+
+        const office = await getOffice({ id }, select);
+
         if (!office) {
             return NextResponse.json({ error: 'Office not found' }, { status: 404 });
         }

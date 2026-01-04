@@ -1,12 +1,13 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from '@/lib/axios';
 import Skeleton from '@/app/components/common/Skeleton';
 
 export default function ReportDetailPage() {
     const { id } = useParams();
+    const searchParams = useSearchParams();
     const [report, setReport] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,7 +16,9 @@ export default function ReportDetailPage() {
         const fetchReport = async () => {
             if (!id) return;
             try {
-                const response = await axios.get(`/api/getReport/${id}`);
+                const queryString = searchParams.toString();
+                const url = `/api/getReport/${id}${queryString ? `?${queryString}` : ''}`;
+                const response = await axios.get(url);
                 setReport(response.data);
             } catch (error) {
                 console.error('Error fetching report:', error);
@@ -25,7 +28,7 @@ export default function ReportDetailPage() {
             }
         };
         fetchReport();
-    }, [id]);
+    }, [id, searchParams]);
 
     if (loading) {
         return (

@@ -5,8 +5,17 @@ import FeatureCard from './components/common/FeatureCard';
 
 export const revalidate = 60;
 
-export default async function Home() {
-  const stats = await getGlobalStatsForToday();
+export default async function Home({ searchParams: searchParamsPromise }) {
+  const sp = await searchParamsPromise;
+
+  const filters = {
+    office_type_id: sp.office_type_id,
+    province: sp.province,
+    district: sp.district,
+    municipality: sp.municipality
+  };
+
+  const stats = await getGlobalStatsForToday(filters);
 
   const formatMoney = (amount) => {
     const num = parseFloat(amount) || 0;

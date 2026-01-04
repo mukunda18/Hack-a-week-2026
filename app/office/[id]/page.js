@@ -1,4 +1,4 @@
-import { getOfficeById, getOfficeStats, getReportsByOffice } from '@/lib/db';
+import { getOffice, getOfficeStats, getReports } from '@/lib/db';
 import Link from 'next/link';
 import StatsCard from '../../components/common/StatsCard';
 import ReportsTable from '../../components/office/ReportsTable';
@@ -6,12 +6,51 @@ import OfficeHeader from '../../components/office/OfficeHeader';
 
 export const revalidate = 60;
 
-export default async function OfficePage({ params }) {
+export default async function OfficePage({ params, searchParams: searchParamsPromise }) {
     const { id } = await params;
+    const sp = await searchParamsPromise;
 
-    const officeData = getOfficeById(id);
+    // Separate report filters from selection options
+    const reportFilters = {
+        office_id: id,
+        id: sp.report_id,
+        ip_hash: sp.ip_hash,
+        service_type: sp.service_type,
+        interaction_method: sp.interaction_method,
+        outcome: sp.outcome,
+        bribe_min: sp.bribe_min ? parseFloat(sp.bribe_min) : undefined,
+        bribe_max: sp.bribe_max ? parseFloat(sp.bribe_max) : undefined,
+        delay_min: sp.delay_min ? parseInt(sp.delay_min) : undefined,
+        delay_max: sp.delay_max ? parseInt(sp.delay_max) : undefined,
+        report_date: sp.report_date,
+        date_from: sp.date_from,
+        date_to: sp.date_to,
+        confidence_min: sp.confidence_min ? parseFloat(sp.confidence_min) : undefined,
+        description: sp.description,
+        visit_time: sp.visit_time,
+        province: sp.province,
+        district: sp.district,
+        municipality: sp.municipality
+    };
+
+    const reportSelect = {
+        limit: sp.limit ? parseInt(sp.limit) : 50,
+        offset: sp.offset ? parseInt(sp.offset) : 0,
+        orderBy: sp.orderBy || 'r.created_at',
+        orderDir: sp.orderDir || 'DESC',
+        fields: sp.fields
+    };
+
+    // Clean up empty filters
+    Object.keys(reportFilters).forEach(key => {
+        if (reportFilters[key] === undefined || reportFilters[key] === null || reportFilters[key] === '') {
+            delete reportFilters[key];
+        }
+    });
+
+    const officeData = getOffice({ id }, { fields: sp.office_fields });
     const statsData = getOfficeStats(id);
-    const reportsData = getReportsByOffice(id);
+    const reportsData = getReports(reportFilters, reportSelect);
 
     const [office, stats, reports] = await Promise.all([
         officeData,

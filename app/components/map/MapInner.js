@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Circle, Popup, useMapEvents } from 'react-leaf
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -24,6 +25,7 @@ function ZoomHandler({ setZoom }) {
 }
 
 export default function MapInner() {
+  const searchParams = useSearchParams();
   const [offices, setOffices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [zoom, setZoom] = useState(7);
@@ -31,7 +33,8 @@ export default function MapInner() {
   useEffect(() => {
     async function fetchMapData() {
       try {
-        const response = await fetch('/api/mapData');
+        const queryString = searchParams.toString();
+        const response = await fetch(`/api/mapData${queryString ? `${queryString}` : ''}`);
         if (response.ok) {
           const data = await response.json();
           setOffices(data);
@@ -43,7 +46,7 @@ export default function MapInner() {
       }
     }
     fetchMapData();
-  }, []);
+  }, [searchParams]);
 
 
 

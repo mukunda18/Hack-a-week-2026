@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getReportById } from '@/lib/db';
+import { getReport } from '@/lib/db';
 
 export const revalidate = 60;
 
@@ -9,7 +9,14 @@ export async function GET(request, { params }) {
         if (!id) {
             return NextResponse.json({ error: 'ID is required' }, { status: 400 });
         }
-        const report = await getReportById(id);
+
+        const { searchParams } = new URL(request.url);
+        const select = {
+            fields: searchParams.get('fields')
+        };
+
+        const report = await getReport({ id }, select);
+
         if (!report) {
             return NextResponse.json({ error: 'Report not found' }, { status: 404 });
         }
