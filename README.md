@@ -1,31 +1,28 @@
 # Ghus Meter (घूस Meter)
 
-**A transparency and accountability tool for tracking and reporting corruption.**
+A transparency and accountability tool for tracking and reporting corruption.
 
-## 🔗 Live Project
+## Live Project
 
-The application is deployed and can be accessed at:
+The application is deployed and accessible at:
 
-👉 **[https://hack-a-week-2026.vercel.app/](https://hack-a-week-2026.vercel.app/)**
----
+[https://hack-a-week-2026.vercel.app/](https://hack-a-week-2026.vercel.app/)
 
-### ⚠️ Note on Data
-Please note that the current deployment at [hack-a-week-2026.vercel.app](https://hack-a-week-2026.vercel.app/) contains **mock data**. The reports, heat maps, and statistics shown are for demonstration purposes to illustrate how the system handles crowdsourced information.
+### Note on Data
+The current deployment at [hack-a-week-2026.vercel.app](https://hack-a-week-2026.vercel.app/) uses mock data. The reports, maps, and statistics displayed are for demonstration purposes.
 
----
+## Overview
 
-## 🚀 Overview
+Ghus Meter is a platform for collecting reports on delays and bribes in public and private sector institutions. Citizens can submit anonymous reports of bribes paid for services, creating a geographic record of corruption patterns to inform the public and authorities about areas with systemic issues.
 
-**Ghus Meter** is a web-based platform designed to crowdsource data on delays and bribery in public and private sectors. By allowing citizens to anonymously report "ghus" (bribes) paid for services, the project aims to create a map of corruption, helping the public and authorities identify "red zones" where systemic issues persist.
+## Features
 
-## ✨ Key Features
+* **Anonymous Reporting:** Report incidents without personal identification.
+* **Geographic Visualization:** Map reports by location to identify patterns in specific offices or regions.
+* **Statistics Dashboard:** View aggregate data including report counts, average amounts, and common service delays.
+* **Public Data:** Reports are publicly available for institutional accountability.
 
-* **Anonymous Reporting:** Securely report incidents without revealing your identity.
-* **Interactive Map:** Visualize which offices or locations have the highest frequency of reports using geospatial data.
-* **Real-time Dashboard:** View statistics on total reports, average bribe amounts, and common service delays.
-* **Crowdsourced Transparency:** Publicly available data to hold institutions accountable.
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Frontend:** [Next.js](https://nextjs.org/) (App Router)
 * **Styling:** Tailwind CSS
@@ -33,24 +30,21 @@ Please note that the current deployment at [hack-a-week-2026.vercel.app](https:/
 * **Database:** [Neon Postgres](https://neon.tech/) (Serverless Postgres)
 * **Deployment:** Vercel
 
-## 🛡️ Privacy & Security
+## Privacy & Security
 
-* **Identity Protection:** No personal identifying information (PII) is collected during the reporting process.
-* **Data Integrity:** Reports are stored securely in a relational database, ensuring data consistency and reliability.
+* **Identity Protection:** No personal identifying information is collected during reporting.
+* **Data Security:** Reports are stored in a relational database with standard data protection measures.
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome to make this tool more effective for the community:
+To contribute to this project:
 
-1. **Fork** the Project.
-2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`).
-3. **Commit** your Changes (`git commit -m 'Add some AmazingFeature'`).
-4. **Push** to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a **Pull Request**.
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/description`).
+3. Commit your changes (`git commit -m 'Description of changes'`).
+4. Push to the branch (`git push origin feature/description`).
+5. Open a pull request.
 
-## 🏆 Acknowledgments
+## Acknowledgments
 
-* Developed during the **LOCUS Hack-A-Week 2026**.
-* Inspired by the need for transparency and the fight against systemic corruption in public service delivery.
-
----
+Developed during the LOCUS Hack-A-Week 2026 event.
